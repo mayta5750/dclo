@@ -1,0 +1,107 @@
+table {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #cccccc;
+}
+
+#dataForm {
+    padding: 15px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #cccccc;
+}
+
+#deleteForm {
+    display: inline-block;
+}
+
+.alert-custom {
+    float: right;
+    border: 1px solid green;
+    border-radius: 4px;
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 6px 10px;
+}
+
+.alert-custom p {
+    margin: 0;
+}
+
+.alert-custom p span {
+    font-weight: bold;
+}
+
+hr {
+    border-top: 1px solid #dddddd;
+}
+.header1{
+    background:  #d1f2eb ;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+html, body, .nav1{
+    margin: 0px!important;
+    padding: 0px!important;
+    border: 10px!important;
+}
+.form1{
+    padding: 15px!important;
+}
+audio:hover, audio:focus, audio:active
+{
+-webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-webkit-transform: scale(1.05);
+-moz-transform: scale(1.05);
+transform: scale(1.05);
+}
+.audio
+{
+-webkit-transition:all 0.5s linear;
+-moz-transition:all 0.5s linear;
+-o-transition:all 0.5s linear;
+transition:all 0.5s linear;
+-moz-box-shadow: 2px 2px 4px 0px #006773;
+-webkit-box-shadow:  2px 2px 4px 0px #006773;
+box-shadow: 2px 2px 4px 0px #006773;
+-moz-border-radius:7px 7px 7px 7px ;
+-webkit-border-radius:7px 7px 7px 7px ;
+border-radius:7px 7px 7px 7px ;
+width: 90px!important;
+}
+.audio2
+{
+-webkit-transition:all 0.5s linear;
+-moz-transition:all 0.5s linear;
+-o-transition:all 0.5s linear;
+transition:all 0.5s linear;
+-moz-box-shadow: 2px 2px 4px 0px #006773;
+-webkit-box-shadow:  2px 2px 4px 0px #006773;
+box-shadow: 2px 2px 4px 0px #006773;
+-moz-border-radius:7px 7px 7px 7px ;
+-webkit-border-radius:7px 7px 7px 7px ;
+border-radius:7px 7px 7px 7px ;
+width: 100%;
+height: 40px;
+}
+.label{
+    font-size:20px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+
+}
+#borde .page-header container{
+    padding: 100px!important;
+    border: 100px!important;
+}
+.borde .page-header container{
+    padding: 100px!important;
+    border: 100px!important;
+    background: #006773;
+}
+.img{
+    border-radius: 10px;
+}
+
