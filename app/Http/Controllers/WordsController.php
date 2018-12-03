@@ -25,12 +25,12 @@ use Illuminate\Support\Facades\File;
 use DB;
 class WordsController extends Controller
 {
-
     public function getSubmiteAtAttribute($submited_at){
         return new Date($submited_at);
     }
     public function __construct()
     {
+        setlocale(LC_ALL, 'es_ES');
         Carbon::setLocale('es');
         Date::setLocale('es');
         \Date::setLocale('es');
@@ -81,7 +81,7 @@ class WordsController extends Controller
             ->orderBy('id_word')
             ->grapheme($grapheme)
             ->id_language_from($id_language_from) 
-            ->paginate(20);
+            ->paginate(10);
              //->get();
 
             $item_languages = App\languages::distinct()
@@ -373,22 +373,6 @@ class WordsController extends Controller
             return redirect('/words');
     
     }
-   
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-   /* public function destroy($id)
-    {
-	    $item = Student::find($id);
-	    $student->destroy($id);
-
-	    Session::flash('message', $student['name'] . ' deleted successfully');
-	    return redirect('/words');
-    }*/
-
     public static function audio($id_word){
         $word = App\words::distinct()
             ->select('files.path')

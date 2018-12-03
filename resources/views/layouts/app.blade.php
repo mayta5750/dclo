@@ -6,8 +6,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>OEI</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+   <!-- <title>{{ config('app.name', 'OEI') }}</title>-->
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,9 +25,9 @@
     <link rel="stylesheet" href="{!! asset('assets/css/bootstrap.min.css') !!}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <!--<link href="{{ asset('css/style.css') }}" rel="stylesheet">-->
-
-
+ 
 </head>
+
 <body>
     <div style="background:#dff0d8">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -49,8 +50,23 @@
                 //dd(isset(Auth::user()->tipoUsuario));
                 if(isset(Auth::user()->tipoUsuario)){
                 if(Auth::user()->tipoUsuario==1){?>
-                <div class="col-md-2">
-                    <button onclick="location.href='{{ url('/register') }}'" type="button" class="btn btn-dark">Adicionar Usuario</button>
+                <div class="dropdown col-md-2">
+                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Usuarios
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button onclick="location.href='{{ url('/register') }}'" class="dropdown-item btn-dark" type="button">Adicionar</button>
+                        <button onclick="location.href='{{ url('/users') }}'" class="dropdown-item btn-dark" type="button">Usuarios</button>
+                    </div>
+                </div>
+                <div class="dropdown col-md-2">
+                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Idioma
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button onclick="location.href='{{ url('/create') }}'" class="dropdown-item btn-dark" type="button">Adicionar</button>
+                        <button onclick="location.href='{{ url('/languages') }}'" class="dropdown-item btn-dark" type="button">Idiomas</button>
+                    </div>
                 </div>
                 <?php ; } 
                 }?>
@@ -110,5 +126,3 @@
         <main class="py-4">
             @yield('content')
         </main>
-    
-

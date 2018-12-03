@@ -7,36 +7,38 @@
 @section('content')
 <div id="borde" class="borde" style="padding:80px 100px 0 100px">
 <div class="" style="padding:0 10% 0 10%">
-
     <h2>Actualizar Registro</h2>
-        <hr/>
-        
-        {!! Form::open(['id_word' => 'dataForm', 'method' => 'PATCH', 'url' => '/words/' . $item->id_word, 'enctype' => 'multipart/form-data' ]) !!}
+    <hr/> 
+    {!! Form::open(['id_word' => 'dataForm', 'method' => 'PATCH', 'url' => '/words/' . $item->id_word, 'enctype' => 'multipart/form-data' ]) !!}
         <!-- {!! Form::open(['url' => '/words', 'enctype' => 'multipart/form-data']) !!}-->
-        <!--AUDIO-->
-
+    <!--AUDIO-->
         <div class="row">
             <div class="col-md-4">
                 <div>
-                        <img style="width:100%"src="{{ asset('storage/dclo_public/img_out_L/'.$item->path) }}" class="img-responsive img-rounded" />
-                        <!--ln -s /opt/lampp/htdocs/oei/storage/app/public/imagen /opt/lampp/htdocs/oei/public/assets/imagen-->              
+                    <img style="width:100%"src="{{$item->path==null? asset('storage/dclo_public/micelanea/nada.svg') : 'http://web.oei.bo/dclo_public/img_out_L/L_'.$item->path }}" class="img-responsive img-rounded" />
                 </div>
                 <div>
                         <audio controls class="audio2"> 
                         <!--<source src="{!! asset('assets/'.$item->path) !!}" type="audio/mp3">-->
-                        <source src="{{ asset('storage/dclo_public/audios/'.$items->path) }}" type="audio/mp3">
+                        <source src="{{'http://web.oei.bo/dclo_public/audios/'.App\Http\Controllers\TestController::audio($item->id_word) }}" type="audio/mp3">
                         Your browser does not support the audio element.
-                        </audio> <br>                         
+                        </audio> <br>
+                       <!-- <audio id="sonido" src="{{'http://web.oei.bo/dclo_public/audios/'.App\Http\Controllers\TestController::audio($item->id_word) }}">
+                        </audio>
+                        <button onclick="javascript:document.getElementById('sonido').play();">
+                        Ejecutar</button>
+                        <button onclick="javascript:document.getElementById('sonido').pause();">
+                        Pausa</button>-->
                 </div>
             </div>
             <div class="col-md-8" >
             <!--WORDS-->
-            <div class="form-group" style="padding:0 0 2% 10%">
+                <div class="form-group" style="padding:0 0 2% 10%">
                     {!! Form::label('id_word', 'ID : ',array('class' => 'label')); !!}
                     {!! Form::label('id_word', $item->id_word,array('class' => 'label')); !!}
                 </div> 
-            {{ csrf_field() }}
-            <hr/>
+                {{ csrf_field() }}
+                <hr/>
                 <div class="form-group" style="padding:0 0 2% 10%">
                     <label for="filename" class="label">IMAGEN:</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="filename"/>
@@ -46,16 +48,11 @@
                     <label for="fileaudio" class="label">AUDIO:</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="fileaudio"/>
                 </div>
-
                 <hr/>
-                
-
-
             </div>
         </div>
         <hr/>
-
-                    <!--Language-->
+        <!--Language-->
                 <div class="form-group">
                     <label for="idioma" class="label">Idioma :</label>
                     <select class="form-control" id="idioma" name="idioma">
@@ -117,21 +114,14 @@
             </div>
         </div>
 
-    </div>
-    <div class="col-2 mx-auto">
-        {!! Form::submit('ACTUALIZAR', ['class' => 'btn btn-primary pull-right center']); !!}
-    </div>
+        </div>
+        <div class="col-2 mx-auto">
+            {!! Form::submit('ACTUALIZAR', ['class' => 'btn btn-primary pull-right center']); !!}
+        </div>
     {!! Form::close() !!}
     </div>
 
-</div>
-    
-    
-
-    
-
+   </div>
  <br>
 </div>
-   
-
 @endsection()

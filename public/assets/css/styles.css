@@ -71,6 +71,7 @@ box-shadow: 2px 2px 4px 0px #006773;
 -webkit-border-radius:7px 7px 7px 7px ;
 border-radius:7px 7px 7px 7px ;
 width: 90px!important;
+background: black;
 }
 .audio2
 {
@@ -104,4 +105,11 @@ height: 40px;
 .img{
     border-radius: 10px;
 }
+td{
+    vertical-align:middle;
+}
+.hh1{
+    color: #2ECC71;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
 

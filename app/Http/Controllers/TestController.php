@@ -28,11 +28,7 @@ class TestController extends Controller
 {
     public function __construct()
     {
-        /*setlocale(LC_ALL,"es_ES");
-
-        \Date::setlocale(LC_ALL,"es_ES");
-
-        Date::setlocale(LC_ALL,"es_ES");*/
+        setlocale(LC_ALL, 'es_ES');
         Carbon::setLocale('es');
         Date::setLocale('es');
         \Date::setLocale('es');
@@ -529,17 +525,17 @@ class TestController extends Controller
             $eliminados = $con.' DUPLICADOS \n'.$eliminados;
             echo'<script type="text/javascript">
             alert("'.$eliminados.'");
-            window.location.href="words/vistalote'.$id_ver.'";
+            window.location.href="words/vistalote'.$id_ver.'/'.$id_language.'";
             </script>'; 
         }else
-            return redirect('words/vistalote'.$id_ver);
+            return redirect('words/vistalote'.$id_ver.'/'.$id_language);
                         //$this->vistalote_fecha($id_ver);
 
 
 
        
     }
-    public function vistalote_fecha($id){
+    public function vistalote_fecha($id,$id_language_from){
        
         $fecha = $this->getFechaLote($id);
 
@@ -578,23 +574,28 @@ class TestController extends Controller
             ->leftjoin('files','definition_medias.id_file','=','files.id_file')
             ->where('words.created_at','=',$fecha)
             ->where('words.id_language_from','!=',1)
+            ->where('words.id_language_from','=',$id_language_from)
+
             ->orderBy('id_word')
-            ->paginate(40);
+            ->paginate(15);
             //dd($fecha);
-            return view('import.vistalote',compact('word'))->with('fecha',$fecha)->with('idioma',$idioma)->with('nueva_carpeta',$nueva_carpeta);
+            return view('import.vistalote',compact('word'))->with('fecha',$fecha)->with('idioma',$idioma)->with('nueva_carpeta',$nueva_carpeta)->with('id_language_from',$id_language_from);
             //return view('vistalote'.$id,compact('word'))->with('fecha',$fecha)->with('idioma',$idioma)->with('nueva_carpeta',$nueva_carpeta);
             //return 'h';
     }
     public function listarlote(){
         $lotes = App\words::distinct()
         ->select(
-        'words.created_at'
+        'words.created_at','words.id_language_from','languages.language_name'
         )
-        ->distinct('words.created_at')
+        ->join('languages','languages.id_language','=','words.id_language_from')
+        ->distinct('words.created_at','words.id_language_from')
             ->orderBy('created_at', 'desc')
+            //
             ->where('id_word','!=',0)
             ->where('id_language_from','!=',1)
-            ->paginate(500);
+            //->paginate(500);
+            ->get();
             return view('import.listarlote',compact('lotes'));      
     }
 
@@ -990,7 +991,6 @@ class TestController extends Controller
         $id = $word['id_word_definition'];
         return ($id);
     }
-    
     public function getIdDefinitionCategories(){
         $word = App\definition_categories::distinct()
         ->orderby('id_definition_category','DESC')->take(1)->get()->first();
@@ -1034,19 +1034,8 @@ class TestController extends Controller
         $id = $word['id_word2definition'];
         return ($id);
     }
-    public function getIdioma($cad){
-        if(strtoupper($cad)=='AYMARA')
-            return 2;
-        if(strtoupper($cad)=='QUECHUA')
-            return 3;
-        if(strtoupper($cad)=='GUARANI')
-            return 4;
-        if(strtoupper($cad)==NULL)
-            return dd("FORMATO INADECUADO");
-    }
     public function getDuplicado($language_name,$grapheme){
         $id_language=$this->getId_Language($language_name);
-
         $word = App\words::distinct()
             ->select('words.grapheme')
             ->where('words.grapheme','=',$grapheme)
@@ -1091,10 +1080,11 @@ class TestController extends Controller
             $fecha = $word['created_at'];
         return $fecha;
     }
-    public static function getIdLote($fecha){
+    public static function getIdLote($fecha,$id_language_from){
         $word = App\words::distinct()
             ->select('words.id_word')
             ->where('words.created_at','=',$fecha)
+            ->where('words.id_language_from','=',$id_language_from)
             ->get()
             ->first();
             $id = $word['id_word'];
@@ -1125,8 +1115,16 @@ class TestController extends Controller
             $ruta = $ruta.$cadena[$i].'/';
         return $ruta;
     } 
-
-
+    public static function contarPalabra($fecha,$id_language_from){
+        $item = App\words::distinct()
+        ->select('words.grapheme')
+        ->where('words.created_at','=',$fecha)
+        ->where('words.id_language_from','=',$id_language_from)
+        ->where('words.id_language_from','!=','1')
+        ->count();
+       // dd($item);
+        return $item;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -1274,7 +1272,7 @@ class TestController extends Controller
     {
        
     }
-    public function borrar()
+    /*public function borrar()
     {
         $item = App\word2definitions::distinct()
         ->where('word2definitions.id_word2definition','>',0)
@@ -1309,7 +1307,8 @@ class TestController extends Controller
 //dd($id);
 	   // Session::flash('message', $word2definitions['id_word2definition'] . ' deleted successfully');
 	    return redirect('words/lote');
-    }
+    }*/
+    /*
     public function borrar2()
     {
         $item = App\word2definitions::distinct()
@@ -1345,6 +1344,6 @@ class TestController extends Controller
 //dd($id);
 	   // Session::flash('message', $word2definitions['id_word2definition'] . ' deleted successfully');
 	    return redirect('words/lote');
-    }
+    }*/
     
 }

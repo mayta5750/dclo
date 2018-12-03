@@ -18,7 +18,11 @@ class UserController extends Controller
 
     public function index()
     {
-        //
+        $users = User::distinct()
+        ->select('users.*')
+        //->where('languages.id_language','!=',1)
+        ->get();
+        return view('auth.users',compact('users'));
     }
 
     /**
